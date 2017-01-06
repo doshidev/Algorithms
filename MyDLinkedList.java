@@ -83,7 +83,7 @@ public class MyDLinkedList<E> {
             return;
         }
         
-        //If inserting before header
+        //If inserting before head
         if(header.data.equals(key)){
             addFirst(data);
             return;

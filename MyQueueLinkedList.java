@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 /**
  * Implementation of queue using a LinkedList
  * Created by Devang on 04-Jan-17.
@@ -16,31 +14,23 @@ public class MyQueueLinkedList<E> {
     }
     
     public E dequeue(){
-        if (myList.header == null)
+        if (myList.head == null)
             return null;
-        E data = myList.header.data;
+        E data = myList.head.data;
         myList.remove(data);
         return data;
     }
     
     public int size() {
-        if (myList.header == null)
-            return 0;
-        int cnt = 1;
-        MyLinkedList.Node currentNode = myList.header;
-        while(currentNode.next != null){
-            currentNode = currentNode.next;
-            cnt++;
-        }
-        return cnt;
+        return myList.size;
     }
     
     public boolean isEmpty() {
-        return (myList.header == null);
+        return (myList.head == null);
     }
     
     public E front() {
-        return myList.header.data;
+        return myList.head.data;
     }
     
     @Override

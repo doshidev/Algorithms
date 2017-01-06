@@ -4,70 +4,82 @@
  */
 public class MyLinkedList<E> {
     
-    Node<E> header;
+    Node<E> head;
+    Node<E> tail;
+    int size;
     
     public MyLinkedList() {
-        header = null;
+        head = null;
+        tail = null;
+        size = 0;
     }
     
     
     public void addLast(E data) {
         Node newNode = new Node(data);
-        if (header == null) {
-            header = newNode;
-            return;
+        if (head == null) {
+            head = newNode;
+            tail = head;
+        } else {
+            tail.next = newNode;
+            tail = newNode;
         }
-        Node currentNode = header;
-        while (currentNode.next != null) {
-            currentNode = currentNode.next;
-        }
-        currentNode.next = newNode;
-        newNode.next = null;
+        size++;
     }
     
     public void addFirst(E data) {
         Node newNode = new Node(data);
-        if (header == null) {
-            header = newNode;
-            newNode.next = null;
+        if (head == null) {
+            head = newNode;
+            tail = head;
         } else {
-            newNode.next = header;
-            header = newNode;
+            newNode.next = head;
+            head = newNode;
         }
+        size++;
     }
     
     public void remove(E key) {
-        if (header == null) {
+        if (head == null) {
             return;
         }
         
-        if (header.data.equals(key)) {
-            header = header.next;
-            return;
-        }
-        
-        Node currentNode = header;
-        while (!(currentNode.data.equals(key)) && !(currentNode.next == null)) {
-            if (currentNode.next.data.equals(key)) {
-                currentNode.next = currentNode.next.next;
-                return;
+        if (head.data.equals(key)) {
+            head = head.next;
+            if(head.next == null){
+                tail = null;
             }
-            currentNode = currentNode.next;
+        } else {
+            Node currentNode = head;
+            while (currentNode.next != null){
+                if (currentNode.next.data.equals(key)) {
+                    currentNode.next = currentNode.next.next;
+                    if(currentNode.next == null){
+                        tail = currentNode;
+                    }
+                    break;
+                }
+                currentNode = currentNode.next;
+            }
         }
+        size--;
     }
     
     public void insertAfter(E key, E data){
-        if (header == null) {
+        if (head == null) {
             return;
         }
-        
         Node newNode = new Node(data);
-        Node currentNode = header;
+        Node currentNode = head;
         
-        while (currentNode.next != null){
+        while (currentNode != null){
             if(currentNode.data.equals(key)){
                 newNode.next = currentNode.next;
                 currentNode.next = newNode;
+                if(newNode.next == null){
+                    tail = newNode;
+                }
+                size++;
                 return;
             }
             currentNode = currentNode.next;
@@ -75,24 +87,26 @@ public class MyLinkedList<E> {
     }
     
     public void insertBefore(E key, E data){
-        if (header == null) {
+        if (head == null) {
             return;
         }
         
-        //If inserting before header
-        if(header.data.equals(key)){
+        //If inserting before head
+        if(head.data.equals(key)){
             addFirst(data);
+            size++;
             return;
         }
     
         Node newNode = new Node(data);
-        Node currentNode = header;
+        Node currentNode = head;
         
         //Else iterate till end
         while (currentNode.next != null){
             if(currentNode.next.data.equals(key)){
                 newNode.next = currentNode.next;
                 currentNode.next = newNode;
+                size++;
                 return;
             }
             currentNode = currentNode.next;
@@ -100,7 +114,7 @@ public class MyLinkedList<E> {
     }
     
     public String toString() {
-        Node currentItem = header;
+        Node currentItem = head;
         String output = "[";
         int cnt = 0;
         while (currentItem.next != null) {
@@ -132,13 +146,19 @@ public class MyLinkedList<E> {
         list1.addLast("World");
         list1.addLast("!");
         System.out.println(list1);
+        System.out.println("tail: " + list1.tail.data);
         list1.remove("!");
+        System.out.println("tail: " + list1.tail.data);
         System.out.println(list1);
         list1.addFirst("!");
         System.out.println(list1);
+        System.out.println("Size: " + list1.size);
         list1.insertAfter("Hello", "Everyone");
         System.out.println(list1);
         list1.insertBefore("Hello", 125);
+        list1.remove("World");
         System.out.println(list1);
+        System.out.println("tail: " + list1.tail.data);
+        System.out.println("Size: " + list1.size);
     }
 }
