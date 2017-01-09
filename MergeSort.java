@@ -1,5 +1,5 @@
 /**
- * This program MergeSorts and int array.
+ * This program MergeSorts an int array.
  * Created by Devang on 08-Jan-17.
  */
 public class MergeSort {
