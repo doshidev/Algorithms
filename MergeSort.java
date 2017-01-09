@@ -4,8 +4,7 @@
  */
 public class MergeSort {
     public static void main(String[] args){
-        // int[] array = {5, 8, 24, 15, 200, 192, 86, 35, 78, 4 ,9};
-        int[] array = {};
+        int[] array = {5, 8, 24, 15, 200, 192, 86, 35, 78, 4 ,9};
         printArray(array);
         array = sort(array);
         printArray(array);
