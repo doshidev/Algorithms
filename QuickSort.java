@@ -4,7 +4,7 @@
  */
 public class QuickSort {
     public static void main(String[] args){
-        int[] collection = {0, 5, 1, 1, 1, 1, 2, 2, 2, 3, 0};
+        int[] collection = {5, 8, 24, 15, 200, 192, 86, 35, 78, 24 ,9, 24};
         printArray(collection);
         sort(collection, 0, collection.length - 1);
         printArray(collection);
@@ -17,18 +17,19 @@ public class QuickSort {
             return;
         }
         //if only two elements, compare, swap and return
-        if(right - left == 1){
+        /* if(right - left == 1){
             if(collection[left] > collection[right]) {
                 int t2 = collection[left];
                 collection[left] = collection[right];
                 collection[right] = t2;
             }
             return;
-        }
+        } */
+        
         //Select pivot
-        int[] pvt = findPivot(collection, left, right);
-        int p = pvt[0];
-        int pivot = pvt[1];
+        
+        int p = findPivot(collection, left, right);
+        int pivot = collection[p];
         
         //Swap pivot with left
         int t1 = collection[left];
@@ -73,40 +74,30 @@ public class QuickSort {
         sort(collection, p + 1, right);
     }
     
-    private static int[] findPivot(int[] collection, int left, int right){
-        int[] pivot = new int[2];
+    private static int findPivot(int[] collection, int left, int right){
+        int pivot;
         if(left == right || right - left == 1){
             if(collection[right] > collection[left]) {
-                pivot[0] = right;
-                pivot[1] = collection[right];
+                pivot = right;
             } else {
-                pivot[0] = left;
-                pivot[1] = collection[left];
+                pivot = left;
             }
         } else {
             int middle = (left + right) / 2;
-            int m = median(collection[left], collection[right], collection[middle]);
-            
-            if (collection[left] == m) {
-                pivot[0] = left;
-                pivot[1] = collection[left];
-            } else if(collection[middle] == m){
-                pivot[0] = middle;
-                pivot[1] = collection[middle];
-            } else if(collection[right] == m){
-                pivot[0] = right;
-                pivot[1] = collection[right];
-            }
+            pivot = median(collection, left, right, middle);
         }
         return pivot;
     }
     
-    private static int median(int a, int b, int c){
+    private static int median(int[] collection, int left, int right, int middle){
+        int a = collection[left];
+        int b = collection[right];
+        int c = collection[middle];
         if((a <= b && a >= c) ||(a >= b && a <= c))
-            return a;
+            return left;
         if((b <= a && b >= c) ||(b >= a && b <= c))
-            return b;
-        return c;
+            return right;
+        return middle;
     }
     
     private static void printArray(int[] collection){
