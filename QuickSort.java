@@ -16,16 +16,7 @@ public class QuickSort {
         if(right - left < 1){
             return;
         }
-        //if only two elements, compare, swap and return
-        /* if(right - left == 1){
-            if(collection[left] > collection[right]) {
-                int t2 = collection[left];
-                collection[left] = collection[right];
-                collection[right] = t2;
-            }
-            return;
-        } */
-        
+                
         //Select pivot
         
         int p = findPivot(collection, left, right);
