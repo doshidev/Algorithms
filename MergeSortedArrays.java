@@ -44,21 +44,25 @@ public class MergeSortedArrays {
         printArray(a);
         printArray(b);
         System.out.println("\n Merging...\n");
+        
         int ptr = a.length - 1;
         int aptr = 0;
+        int asize = a.length;
         
-        if(a.length == 1 && a[0] < 1){
+        // If there is length of array a[] is 1 and the value is empty, set pointer of a to -1
+        if(asize == 1 && a[0] < 1){
             aptr = -1;
         } else {
-            for (int i = 0; i < a.length; i++) {
-                if (i+1 > a.length && a[i] > a[i + 1]) {
+            // find out the last filled element of array a[]
+            for (int i = 0; i < asize; i++) {
+                if (i+1 >= asize || a[i] > a[i + 1]) {
                     aptr = i;
                     break;
                 }
             }
         }
         // If array a cannot accommodate all of b, return;
-        if ((a.length < 1) || ((a.length - (aptr + 1)) != b.length)){
+        if ((asize < 1) || ((asize - (aptr + 1)) != b.length)){
             System.out.println("Error!! not enough empty space");
             System.out.printf("------------------------------\n");
             return;
