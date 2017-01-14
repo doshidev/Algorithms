@@ -1,5 +1,5 @@
 /**
- * The equation (a^3 + b^3 + c^3 + d^3 + e^3 = f^3) has exactly one integral
+ * The equation (a^5 + b^5 + c^5 + d^5 + e^5 = f^5) has exactly one integral
  * solution that satisfies (0 < a <= b <= c <= d <= e <=f <= 75). Write a program
  * to find the solution. Hint: First, precompute all values of and store them in
  * an array. Then, for each tuple , you only need to verify that some F exists in
