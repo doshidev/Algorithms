@@ -16,7 +16,7 @@ public class Equation {
         int ceiling = 75;
         int power = 5;
         long startTime = System.currentTimeMillis();
-        long[] powers = generatePowers(ceiling, power);
+        int[] powers = generatePowers(ceiling, power);
 
         solveEquation(ceiling, powers, power);
 
@@ -25,17 +25,17 @@ public class Equation {
         System.out.println("\nElapsed Time: " + elapsedTime + " ms");
     }
     
-    private static void solveEquation(int ceiling, long[] powers, int power) {
+    private static void solveEquation(int ceiling, int[] powers, int power) {
         // int[] result = new int[6];
         
         for(int f = ceiling; f > 0; f--){
-            long sum = powers[f];
+            int sum = powers[f];
             int balanceRoot = (int) Math.pow(sum - 4, (1.0/power));
             if(balanceRoot > f){
                 balanceRoot = f;
             }
             for(int e = balanceRoot; e > 0; e--){
-                long balance = sum - powers[e];
+                int balance = sum - powers[e];
                 balanceRoot = (int) Math.pow(balance - 3, (1.0/power));
                 if (balanceRoot > e){
                     balanceRoot = e;
@@ -70,10 +70,10 @@ public class Equation {
         
     }
     
-    private static long[] generatePowers(int ceiling, int power){
-        long[] powers = new long[ceiling + 1];
+    private static int[] generatePowers(int ceiling, int power){
+        int[] powers = new int[ceiling + 1];
         for (int i = 0; i <= ceiling; i++) {
-            powers[i] = (long) Math.pow(i, power);
+            powers[i] = (int) Math.pow(i, power);
         }
         return powers;
     }
