@@ -13,55 +13,67 @@
  */
 public class Equation {
     public static void main(String[] args) {
+        int ceiling = 75;
+        int power = 5;
         long startTime = System.currentTimeMillis();
-        int[] powers = generatePowers(75, 5);
-        int[] result = solveEquation(powers, 5);
-        System.out.printf("A = %d\nB = %d\nC = %d\nD = %d\nE = %d\nF = %d", result[0], result[1], result[2], result[3], result[4], result[5]);
+        long[] powers = generatePowers(ceiling, power);
+
+        solveEquation(ceiling, powers, power);
+
         long stopTime = System.currentTimeMillis();
         long elapsedTime = stopTime - startTime;
         System.out.println("\nElapsed Time: " + elapsedTime + " ms");
     }
     
-    private static int[] solveEquation(int[] powers, int power) {
-        int[] result = new int[6];
-        double sum = 0;
-        for (int a = 1; a < powers.length; a++) {
-            sum += a;
-            for (int b = a; b < powers.length; b++) {
-                for (int c = b; c < powers.length; c++) {
-                    for (int d = c; d < powers.length; d++) {
-                        for (int e = d; e < powers.length; e++) {
-                            sum = Math.pow(a, power)
-                                    + Math.pow(b, power)
-                                    + Math.pow(c, power)
-                                    + Math.pow(d, power)
-                                    + Math.pow(e, power);
-                            double f = (Math.pow(sum, (1.0/power)));
-                            if((int)f < powers.length && powers[(int)f] == sum){
-                                result[0] = a;
-                                result[1] = b;
-                                result[2] = c;
-                                result[3] = d;
-                                result[4] = e;
-                                result[5] = (int)f;
-                                return result;
-                            }
+    private static void solveEquation(int ceiling, long[] powers, int power) {
+        // int[] result = new int[6];
+        
+        for(int f = ceiling; f > 0; f--){
+            long sum = powers[f];
+            int balanceRoot = (int) Math.pow(sum - 4, (1.0/power));
+            if(balanceRoot > f){
+                balanceRoot = f;
+            }
+            for(int e = balanceRoot; e > 0; e--){
+                long balance = sum - powers[e];
+                balanceRoot = (int) Math.pow(balance - 3, (1.0/power));
+                if (balanceRoot > e){
+                    balanceRoot = e;
+                }
+                for(int d = balanceRoot; d > 0; d--){
+                    balance = sum - powers[e] - powers[d];
+                    balanceRoot = (int) Math.pow(balance - 2, (1.0/power));
+                    if (balanceRoot > d){
+                        balanceRoot = d;
+                    }
+    
+                    for(int c = balanceRoot; c > 0; c--){
+                        balance = sum - powers[e] - powers[d] - powers[c];
+                        balanceRoot = (int) Math.pow(balance - 1, (1.0/power));
+                        if (balanceRoot > c){
+                            balanceRoot = c;
                         }
                         
-                    }
-                    
-                }
-            }
-            
-        }
+                        for(int b = balanceRoot; b > 0; b--){
+                            balance = sum - powers[e] - powers[d] - powers[c] - powers[b];
+                            balanceRoot = (int) Math.pow(balance, (1.0/power));
+                            if(balanceRoot <= b && powers[balanceRoot] == balance){
+                                System.out.printf("\n[A = %d, B = %d, C = %d, D = %d, E = %d, F = %d]", balanceRoot, b, c, d, e, f);
+                                return;
+                            }
+                            
+                        } // End for "b"
+                    } // End for "c"
+                } // End for "d"
+            } // End for "e"
+        } // End for "f"
         
-        return result;
     }
     
-    private static int[] generatePowers(int ceiling, int power){
-        int[] powers = new int[ceiling + 1];
+    private static long[] generatePowers(int ceiling, int power){
+        long[] powers = new long[ceiling + 1];
         for (int i = 0; i <= ceiling; i++) {
-            powers[i] = (int) Math.pow(i, power);
+            powers[i] = (long) Math.pow(i, power);
         }
         return powers;
     }
