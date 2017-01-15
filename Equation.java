@@ -1,7 +1,7 @@
 /**
  * The equation (a^5 + b^5 + c^5 + d^5 + e^5 = f^5) has exactly one integral
  * solution that satisfies (0 < a <= b <= c <= d <= e <=f <= 75). Write a program
- * to find the solution. Hint: First, precompute all values of and store them in
+ * to find the solution. Hint: First, precompute all values of x^5 and store them in
  * an array. Then, for each tuple , you only need to verify that some F exists in
  * the array. (There are several ways to check for F, one of which is to use a
  * binary search to check for F. Other methods might prove to be more efficient.
