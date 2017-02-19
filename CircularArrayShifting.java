@@ -5,24 +5,32 @@ public class CircularArrayShifting {
     public static void main(String[] args) {
         int[] a = {1, 5, 6, 11, 19, 25, 32, 65, 90};
         printArray(a);
-        int [] b = CircularShift(a, 4);
-        printArray(b);
+        CircularShift(a, 4);
+        printArray(a);
     }
     
-    public static int[] CircularShift(int[] a, int c){
-        int[] b = new int[a.length];
-        int shift;
-        for (int i = 0; i < a.length ; i++) {
-            shift = (i + c) % (a.length);
-            b[shift] = a[i];
+    public static void CircularShift(int[] a, int c){
+        Reverse(a, 0, a.length - 1);
+        Reverse(a, 0, c - 1);
+        Reverse(a, c, a.length - 1);
+    }
+    
+    public static void Reverse(int[] a, int s, int e){
+        
+        int temp;
+        while (s < e){
+            temp = a[s];
+            a[s] = a[e];
+            a[e] = temp;
+            s++;
+            e--;
         }
-        return b;
     }
     
-    public static void printArray(int[] A){
+    public static void printArray(int[] a){
         System.out.print("{");
-        for (int i = 0; i < A.length ; i++) {
-            System.out.print(A[i] +" ");
+        for (int i = 0; i < a.length ; i++) {
+            System.out.print(a[i] +" ");
         }
         System.out.println("}");
     }
