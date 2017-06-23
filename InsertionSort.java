@@ -5,7 +5,7 @@ public class InsertionSort {
     public static void main(String[] args){
         int[] collection = {5, 8, 24, 15, 200, 192, 86, 35, 78, 4 ,9, 20};
         printArray(collection);
-        insertionSort(collection, 'a');
+        insertionSort(collection, 'd');
         printArray(collection);
     }
     
